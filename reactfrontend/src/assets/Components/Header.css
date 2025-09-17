@@ -1,0 +1,10 @@
+﻿#header{
+    justify-content: space-around;
+    flex-direction: row;
+    height: 3em;
+}
+#header .nav-item{
+    color: lightgrey;
+    font-weight: bold;
+    font-size: 1.2em;
+}
