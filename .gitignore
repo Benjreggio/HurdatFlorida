@@ -1,0 +1,59 @@
+# Git ignore for a monorepo with C#, Python, and React
+
+# --------------------------------------------------------------------------
+# C# / .NET Specific
+
+# Binaries and build artifacts
+**/bin/
+**/obj/
+
+# Visual Studio files
+.vs/
+*.suo
+*.user
+*.pdb
+*.pidb
+*.log
+
+# NuGet
+*.nupkg
+packages/
+
+# --------------------------------------------------------------------------
+# Python Specific
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Pycache and compiled files
+__pycache__/
+*.pyc
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# --------------------------------------------------------------------------
+# React / Node.js Specific
+
+# Node modules
+**/node_modules/
+
+# Build output directories
+dist/
+build/
+.vite-temp/
+.vite/
+.eslintcache
+
+# Common OS-specific files
+.DS_Store
+.env
+.idea/
+.vscode/
+
+# Package manager-specific files
+npm-debug.log*
+yarn-error.log*
+.pnpm-store/
