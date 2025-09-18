@@ -19,6 +19,10 @@
 *.nupkg
 packages/
 
+#appsettings files
+appsettings*.json
+appsettings*.Development.json
+
 # --------------------------------------------------------------------------
 # Python Specific
 

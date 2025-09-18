@@ -37,10 +37,9 @@ app.UseRouting();
     pattern: "{controller=Home}/{action=Index}/{id?}"
 );*/
 
-// Defines the main API endpoint at "/api/data".
-// This endpoint returns a new anonymous object, and .NET automatically
-// serializes this object into a JSON response.
+
 app.MapGet("/all+storm+info", () => QueryHandler.getAllStormInfo());
+app.MapGet("/test", () => "Hello World!");
 
 // Starts the web server and listens for incoming HTTP requests.
 app.Run();
