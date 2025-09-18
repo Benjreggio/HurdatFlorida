@@ -20,8 +20,8 @@
 packages/
 
 #appsettings files
-appsettings*.json
-appsettings*.Development.json
+*.appsettings*.json
+*.appsettings*.Development.json
 
 # --------------------------------------------------------------------------
 # Python Specific
