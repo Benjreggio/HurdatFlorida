@@ -1,0 +1,9 @@
+.datatools{
+    display: flex;
+    flex-direction: column;
+}
+.smalltools{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}

@@ -1,0 +1,10 @@
+ .topselector {
+     --bs-border-radius: 0.375rem 0.375rem 0 0;
+     width: 100%;
+ }
+ .bottomselector {
+     --bs-border-radius: 0 0 0.375rem 0.375rem;
+ }
+ .btn{
+    width: 100%;
+ }
