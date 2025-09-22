@@ -9,19 +9,29 @@
 
 # Visual Studio files
 .vs/
-*.suo
-*.user
-*.pdb
-*.pidb
-*.log
+**.suo
+**.user
+**.pdb
+**.pidb
+**.log
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+**.ntvs*
+**.njsproj
+**.sln
+**.sw?
 
 # NuGet
-*.nupkg
+**.nupkg
 packages/
 
 #appsettings files
-*.appsettings.json
-*.appsettings.Development.json
+**/appsettings.json
+**.appsettings.Development.json
 
 # --------------------------------------------------------------------------
 # Python Specific
@@ -43,6 +53,10 @@ __pycache__/
 
 # Node modules
 **/node_modules/
+
+# Logs
+*.log
+*.local
 
 # Build output directories
 dist/
