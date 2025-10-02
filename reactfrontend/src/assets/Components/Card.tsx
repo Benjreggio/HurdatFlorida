@@ -2,19 +2,22 @@ import {Storm} from '../types.ts'
 import './Card.css'
 
 function Card({item, divkey}: {item: Storm, divkey: number}) {
-    var storm_name = item.stormName.toLowerCase().split(' ').map((word) => " " + word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+    var unnamed = item.StormName == "UNNAMED"
+    var title = item.IsHurricane? "Hurricane" : "Tropical Storm"
+    var storm_name = item.StormName.toLowerCase().split(' ').map((word) => " " + word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
     return (
     <div key = {divkey} className = "stormcard">
-        <h2>{(item.isHurricane? "Hurricane" : "Tropical Storm") + storm_name}</h2>
+        <h2>{unnamed? "Unnamed " + title :
+        title + storm_name}</h2>
         <div className='block'>
-            <p>Storm id: {item.stormID}</p>
-            <p>Max wind speed: {item.maxWindSpeed} mph</p>
-            <p>Wind speed during first landfall: {item.maxWindSpeed} mph</p>
-            <p>First landfall date: {item.landfallDate.substring(0,10)} </p>
+            <p>Storm id: {item.StormID}</p>
+            <p>Max wind speed: {item.MaxWindSpeed} mph</p>
+            <p>Wind speed during first landfall: {item.WindSpeedAtLandfall} mph</p>
+            <p>First landfall date: {item.LandfallDate.substring(0,10)} </p>
         </div>
-        {item.hasStrictLandfall? (<div className = "block">
-            <p>Wind speed at strict landfall: {item.strictWindSpeedAtLandfall} mph</p>
-            <p>Strict landfall date: {item.strictLandfallDate.substring(0,10)}</p>
+        {item.HasStrictLandfall? (<div className = "block">
+            <p>Wind speed at strict landfall: {item.StrictWindSpeedAtLandfall} mph</p>
+            <p>Strict landfall date: {item.StrictLandfallDate.substring(0,10)}</p>
         </div>) : <></>}
     </div>);
 }

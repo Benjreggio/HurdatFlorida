@@ -17,16 +17,16 @@ function DataRetriever(props : {queryParams: QueryParams}) {
     const [error, setError] = React.useState<string | null>(null)
     //app.MapGet("/storm+info/{pageNumber}+{pageSize}+{type}+{sortBy}+{ascending}"
     const landfallStrings: Map<string, string> = new Map([
-        ["Any Landfall", "any"],
-        ["Liberal Landfall", "liberal"],
-        ["Strict Landfall", "strict"]
+        ["Any Landfall", "Any"],
+        ["Liberal Landfall", "Liberal"],
+        ["Strict Landfall", "Strict"]
     ])
     const sortTypeStrings: Map<string, string> = new Map([
-        ["Storm Name", "storm_name"],
-        ["Storm id", "storm_id"],
-        ["Date", "landfall_date"],
-        ["Max Wind Speed", "max_wind_speed"],
-        ["Wind Speed at Landfall", "wind_speed_at_landfall"]
+        ["Storm Name", "StormName"],
+        ["Storm id", "StormId"],
+        ["Date", "LandfallDate"],
+        ["Max Wind Speed", "MaxWindSpeed"],
+        ["Wind Speed at Landfall", "WindSpeedAtLandfall"],
     ])
 
     var command_string = `/storm+info/`

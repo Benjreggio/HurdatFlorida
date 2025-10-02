@@ -42,7 +42,9 @@ app.MapGet("/all+storm+info", () => QueryHandler.getAllStormInfo());
 app.MapGet("/storm+info/{pageNumber}+{pageSize}+{type}+{sortBy}+{ascending}", (int pageNumber, int pageSize, string type, string sortBy, bool ascending) => QueryHandler.getStormInfo(pageNumber, pageSize, type, sortBy, ascending));
 app.MapGet("/test", () => "Hello World!");
 app.MapGet("/storm+info/{pageNumber}+{pageSize}+{type}+{sortBy}+{ascending}/{searchterm}", (int pageNumber, int pageSize, string type, string sortBy, bool ascending, string searchterm) => QueryHandler.getStormInfoSearch(pageNumber, pageSize, type, sortBy, ascending,searchterm));
-// Starts the web server and listens for incoming HTTP requests.
+app.MapPost("/upload", (List<Storm> storms) =>
+{
+    NewDataUploader.UploadNewData(storms);
+    return Results.Ok();
+});
 app.Run();
-
-

@@ -33,6 +33,9 @@ packages/
 **/appsettings.json
 **.appsettings.Development.json
 
+#sqlite file
+CSharpBackend/sqliteserver/stormfile.sqlite
+
 # --------------------------------------------------------------------------
 # Python Specific
 

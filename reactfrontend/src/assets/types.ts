@@ -22,14 +22,14 @@ export interface ApiResponse {
 }
 
 export interface Storm {
-  stormID: number
-  stormName: string
-  maxWindSpeed: number
-  windSpeedAtLandfall: number
-  strictWindSpeedAtLandfall: number
-  isHurricane: boolean
-  hasLiberalLandfall: boolean
-  hasStrictLandfall: boolean
-  landfallDate: string 
-  strictLandfallDate: string
+  StormID: number
+  StormName: string
+  MaxWindSpeed: number
+  WindSpeedAtLandfall: number
+  StrictWindSpeedAtLandfall: number
+  IsHurricane: boolean
+  HasLiberalLandfall: boolean
+  HasStrictLandfall: boolean
+  LandfallDate: string 
+  StrictLandfallDate: string
 }
