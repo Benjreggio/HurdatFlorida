@@ -5,10 +5,13 @@ function Card({item, divkey}: {item: Storm, divkey: number}) {
     var unnamed = item.StormName == "UNNAMED"
     var title = item.IsHurricane? "Hurricane" : "Tropical Storm"
     var storm_name = item.StormName.toLowerCase().split(' ').map((word) => " " + word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+    const imgurl = `/figs/storm${item.StormID}.png`
     return (
     <div key = {divkey} className = "stormcard">
-        <h2>{unnamed? "Unnamed " + title :
-        title + storm_name}</h2>
+        <div className = 'block'>
+            <h2>{unnamed? "Unnamed " + title : title + storm_name}</h2>
+            <img src = {imgurl} alt = "No image available" className='stormimage'/>
+        </div>
         <div className='block'>
             <p>Storm id: {item.StormID}</p>
             <p>Max wind speed: {item.MaxWindSpeed} mph</p>

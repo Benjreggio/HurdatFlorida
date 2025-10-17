@@ -1,0 +1,34 @@
+.description-page{
+    display: flex;
+    text-align: left;
+    padding: 3em;
+    flex-direction: column;
+    overflow-y: auto;
+    height: calc(100vh - 3em);
+}
+
+.imgalign{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.textblock{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.right{
+    justify-content: right;
+    text-align: right;
+}
+
+img{
+    max-width: 50%;
+    height: auto; /* Ensures proportional scaling */
+    object-fit: contain;
+}
+
+.center{
+    text-align: center;
+}

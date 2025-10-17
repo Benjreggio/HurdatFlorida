@@ -1,0 +1,11 @@
+﻿.content {
+    display: flex;
+    padding: 3em;
+    flex-direction: column;
+    overflow-y: auto;
+    height: calc(100vh - 3em);
+}
+.details{
+    padding: 1em;
+    margin: 1em;
+}

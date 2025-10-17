@@ -35,8 +35,8 @@ data_payload = json.loads(json_string)
 
 
 try:
-    response = requests.post('http://localhost:5253/upload', json=data_payload)
+    response = requests.post('http://18.219.101.188:5253/upload', json=data_payload)
     response.raise_for_status()
     print("Data successfully uploaded.")
-except:
-    print("Failed to upload data.")
+except requests.exceptions.RequestException as e:
+    print(f"Failed to upload data. {e}")

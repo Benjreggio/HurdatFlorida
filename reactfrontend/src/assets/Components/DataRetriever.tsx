@@ -1,44 +1,32 @@
 import * as React from "react"
 import DataDisplay from "./DataDisplay"
-import { QueryParams, Storm } from "../types.ts"
+import { ApiResponse, QueryParams, Storm } from "../types.ts"
+import { buildApiCommand } from "./buildApiCommand.tsx"
+import { useState } from "react"
+import DataTools from "./DataTools.tsx"
 
-function DataRetriever(props : {queryParams: QueryParams}) {
-    const [debouncedQueryParams, setDebouncedQueryParams] = React.useState(props.queryParams);
-    React.useEffect(() => {
-        const handler = setTimeout(() => {
-            setDebouncedQueryParams(props.queryParams);
-        }, 500); // 500ms debounce delay
-
-        return () => (clearTimeout(handler));
-    })
-    
+function DataRetriever() {
     const [data, setData] = React.useState<Storm[] | null>(null)
     const [loading, setLoading] = React.useState<boolean>(true)
     const [error, setError] = React.useState<string | null>(null)
-    //app.MapGet("/storm+info/{pageNumber}+{pageSize}+{type}+{sortBy}+{ascending}"
-    const landfallStrings: Map<string, string> = new Map([
-        ["Any Landfall", "Any"],
-        ["Liberal Landfall", "Liberal"],
-        ["Strict Landfall", "Strict"]
-    ])
-    const sortTypeStrings: Map<string, string> = new Map([
-        ["Storm Name", "StormName"],
-        ["Storm id", "StormId"],
-        ["Date", "LandfallDate"],
-        ["Max Wind Speed", "MaxWindSpeed"],
-        ["Wind Speed at Landfall", "WindSpeedAtLandfall"],
-    ])
+    const [debouncedQueryParams, setDebouncedQueryParams] = useState<QueryParams>({
+            landfallType: "Any Landfall",
+            sortType: "Storm Name",
+            pageSize: "20",
+            pageNum: 0,
+            asc: true,
+            searchTerm: "",
+            queueResetPage: true
+        });
+    
+    const [totalPages, setTotalPages] = useState<number>(0);
 
-    var command_string = `/storm+info/`
-    + `${props.queryParams.pageNum}+${props.queryParams.pageSize}+`
-    + `${landfallStrings.get(props.queryParams.landfallType)}+${sortTypeStrings.get(props.queryParams.sortType)}+`
-    +  `${props.queryParams.asc}`
-    // If searchTerm is provided, append it to the command string
-    if (props.queryParams.hasOwnProperty('searchTerm') && props.queryParams.searchTerm != "") {
-        command_string += `/${props.queryParams.searchTerm}`;
-    }
+    const { searchTerm, pageNum, pageSize, landfallType, sortType, asc } = debouncedQueryParams;
 
     React.useEffect(() => {
+
+        const command_string = buildApiCommand(debouncedQueryParams);
+
         fetch(import.meta.env.VITE_SERVER_URL + command_string)
             .then((response) => {
                 if (!response.ok) {
@@ -46,17 +34,33 @@ function DataRetriever(props : {queryParams: QueryParams}) {
                 }
                 return response.json()
             })
-            .then((data: Storm[]) => {
+            .then((response: ApiResponse) => {
+                const { data, metaData } = response;
                 setData(data)
+                setTotalPages(metaData.totalPages)
+                if(debouncedQueryParams.queueResetPage) {
+                    setDebouncedQueryParams(prev => ({...prev, queueResetPage: false}))
+                }
                 setLoading(false)
             })
             .catch((error) => {
                 setError(error.message)
                 setLoading(false)
             })
-    }, [debouncedQueryParams]) // Only re-run the effect if debouncedQueryParams changes
+    }, [searchTerm, pageNum, pageSize, landfallType, sortType, asc]) // Only re-run the effect if debouncedQueryParams changes
 
-    return loading? <p>Loading...</p>: error?  <p> {command_string} Error: {error} </p> : <DataDisplay data={data} />
+
+
+    return <div>
+        <DataTools totalPages = {totalPages} debouncedQueryParams = {debouncedQueryParams} setDebouncedQueryParams = {setDebouncedQueryParams}/>
+        {loading? <p>Loading...</p>: 
+        error?  <p> Error: {error} </p> : 
+        <div>
+            <DataDisplay data={data} />
+            {<div> Page {debouncedQueryParams.pageNum + 1} of {totalPages} </div>}
+        </div>}
+    </div>
+        
 }
 
 export default DataRetriever

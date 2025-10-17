@@ -1,7 +1,0 @@
-﻿.content {
-    display: flex;
-    padding: 1em;
-    flex-direction: column;
-    overflow-y: auto;
-    height: calc(100vh - 3em);
-}

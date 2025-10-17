@@ -1,9 +1,8 @@
 import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
-import React from 'react';
 import './OptionSelector.css';
 
-function OptionSelector(props: {setOptionType: React.Dispatch<React.SetStateAction<string>>, option: string, optionName: string, allOptions: string[]}) {
+function OptionSelector(props: {setOptionType: ((value: string) => void), option: string, optionName: string, allOptions: string[]}) {
     return (
         <div className = 'grid-container'>
             <div className = 'grid-item'>
@@ -18,7 +17,7 @@ function OptionSelector(props: {setOptionType: React.Dispatch<React.SetStateActi
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                    {props.allOptions.map(option => <Dropdown.Item eventKey = {option}>{option}</Dropdown.Item>)}
+                    {props.allOptions.map((option,i) => <Dropdown.Item eventKey = {option} key = {option + i}>{option}</Dropdown.Item>)}
                 </Dropdown.Menu>
             </Dropdown>
             </div>

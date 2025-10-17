@@ -1,7 +1,8 @@
 import './App.css'
 import Header from './assets/Components/Header.tsx'
-import MainContent from './assets/Components/MainContent.tsx'
+import DataExplorer from './assets/Components/DataExplorer.tsx'
 import EDAHolder from './assets/Components/EDAHolder.tsx'
+import HurricaneProjectDescriptionPage from './assets/Components/HurricaneProjectDescriptionPage.tsx'
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -11,7 +12,8 @@ function App() {
             <Header />
 
             <Routes>
-                <Route path="/" element={<MainContent/>} />
+                <Route path="/" element={<HurricaneProjectDescriptionPage/>} />
+                <Route path="/DataExplorer" element={<DataExplorer/>} />
                 <Route path="/EDA" element={<EDAHolder />} />
             </Routes>
             

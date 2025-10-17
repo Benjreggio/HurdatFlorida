@@ -56,6 +56,7 @@ __pycache__/
 
 # Node modules
 **/node_modules/
+*.png
 
 # Logs
 *.log
@@ -71,6 +72,7 @@ build/
 # Common OS-specific files
 .DS_Store
 .env
+.env.production
 .idea/
 .vscode/
 

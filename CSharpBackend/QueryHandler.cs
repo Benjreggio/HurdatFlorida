@@ -88,12 +88,47 @@ namespace CSharpBackend
                 ORDER BY {sortBy} {(ascending ? "ASC" : "DESC")}
                 LIMIT {pageSize} OFFSET {pageNumber * pageSize};";
 
+            
+            var totalRows = ConnectionHandler.RunQuery(connection =>
+                {
+                    using (var command = connection.CreateCommand())
+                    {
+                        command.CommandText = "Select COUNT(*) FROM valid_storms " + $@"WHERE 
+                        Has{type}Landfall = 1 {searchString};";
+                        using (var reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                return reader.GetInt32(0);
+                            }
+                            else
+                            {
+                                throw new Exception("Failed to retrieve total row count.");
+                            }
+                        }
+                    }
+                }
+            );
+
             return ConnectionHandler.RunQuery(connection =>
                 {
                     using (var command = connection.CreateCommand())
                     {
                         command.CommandText = commandstring;
-                        return JsonSerializer.Serialize(getStormListFromCommand(command));
+
+                        APIResponse response = new APIResponse
+                        {
+                            data = getStormListFromCommand(command),
+                            metaData = new MetaData
+                            {
+                                currentPage = pageNumber,
+                                pageSize = pageSize,
+                                totalPages = (int)Math.Ceiling((double)totalRows / pageSize),
+                                totalRecords = totalRows
+                            }
+                        };
+
+                        return JsonSerializer.Serialize(response);
                     }
                 }
             );

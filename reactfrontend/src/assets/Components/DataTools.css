@@ -7,3 +7,14 @@
     justify-content: space-between;
     width: 100%;
 }
+.button-container{
+    display: flex;
+    justify-content: space-around;
+}
+.btn-page{
+    margin: 5px;
+    width: auto;
+}
+p {
+    margin: 0;
+}

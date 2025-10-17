@@ -9,3 +9,10 @@
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
     background-color: #f9f9f9;
 }
+
+.stormimage {
+    max-width: 150px;
+    max-height: 150px;
+    object-fit: contain;
+    margin-right: 20px;
+}

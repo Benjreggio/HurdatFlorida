@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:stage": "vite build --base http://18.219.101.188/",
+    "build:prod": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },

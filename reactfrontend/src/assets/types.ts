@@ -6,6 +6,7 @@ export interface QueryParams {
   pageNum: number
   asc: boolean
   searchTerm: string
+  queueResetPage: boolean
 }
 
 export interface SetQueryParams {
@@ -15,14 +16,32 @@ export interface SetQueryParams {
   setPageNum: React.Dispatch<React.SetStateAction<number>>
   setAsc: React.Dispatch<React.SetStateAction<boolean>>
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>
+  setQueueResetPage: React.Dispatch<React.SetStateAction<boolean>>
 }
 
+/*export type SetQueryParam = <K extends keyof QueryParams>(
+    param: K,
+    value: QueryParams[K] | ((prevState: QueryParams[K]) => QueryParams[K])
+) => void;*/
+
+export type SetQueryParam = <K extends keyof QueryParams>
+(param: K) => (value: QueryParams[K]) => void;
+
+
 export interface ApiResponse {
-  data: Storm[]
+  data: Storm[],
+  metaData: MetaData
+}
+
+export interface MetaData {
+  totalPages: number
+  currentPage: number
+  pageSize: number
+  totalRecords: number
 }
 
 export interface Storm {
-  StormID: number
+  StormID: string
   StormName: string
   MaxWindSpeed: number
   WindSpeedAtLandfall: number
